@@ -1,0 +1,47 @@
+body {
+    background-color: orange;
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+
+.Home {
+    text-align: center;
+  }
+  
+  .student-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  
+  .student-card {
+    border: 1px solid #ccc;
+    padding: 16px;
+    margin: 16px;
+    text-align: center;
+    width: 200px;
+  }
+  
+  .student-image {
+    width: 100%;
+    height: auto;
+  }
+  
+  .student-info {
+    margin-top: 8px;
+  }
+
+  h2 {
+    margin-top: 40px;
+  }
+  
+  .home-image-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .home-dozer {
+    width: 300px; /* Adjust the width as needed */
+    height: auto;
+  }

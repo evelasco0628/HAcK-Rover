@@ -12,7 +12,7 @@ body {
 }
 
 .nav {
-  background-color: #333;
+  background-color: #333333;
   color: white;
   display: flex;
   justify-content: space-between;
@@ -42,6 +42,7 @@ body {
   padding: .25rem;
 }
 
+/*
 .nav li.active {
   background-color: #555;
 }
@@ -49,3 +50,4 @@ body {
 .nav li:hover {
   background-color: #777;
 }
+  */
