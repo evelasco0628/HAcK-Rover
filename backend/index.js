@@ -66,6 +66,14 @@ client.on('connect', async () => {
       console.log("Subscribed to 'temp'");
     }
   });
+
+  client.subscribe("humidity", (err) => {
+    if (err) {
+      console.error("Subscription error for 'temp': ", err);
+    } else {
+      console.log("Subscribed to 'humidity'");
+    }
+  });
 });
 
 
@@ -79,6 +87,7 @@ APP.use(express.json());
 // Readings from sensors 
 let latestTemp = null;
 let latestUltrasonic = null;
+let latestHumidity = null;
 
 io.on("connection", (socket) => {
   console.log("Frontend connected to socket");
@@ -115,6 +124,7 @@ io.on("connection", (socket) => {
 setInterval(() => {
   io.emit('temp', latestTemp);
   io.emit('ultrasonic', latestUltrasonic);
+  io.emit('humidity', latestHumidity)
 }, 1000);
 
 server.listen(8000, () => {
@@ -128,5 +138,8 @@ client.on('message', (TOPIC, payload) => {
   }
   else if ( TOPIC === 'ultrasonic' ) {
     latestUltrasonic = payload.toString();
+  }
+  else if ( TOPIC === 'humidity') {
+    latestHumidity = payload.toString();
   }
 });
