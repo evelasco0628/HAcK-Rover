@@ -72,10 +72,11 @@ function Control() {
   return (
     <div>
       <h1>Control</h1>
-      <button onClick={() => sendDirection('left')}>Left</button>
-      <button onClick={() => sendDirection('right')}>Right</button>
-      <button onClick={() => sendDirection('forward')}>Forward</button> 
-      <button onClick={() => sendDirection('backward')}>Backward</button>
+      <p>Temperature: {temp !== null ? `${temp}°C` : 'Loading...'}</p>
+      <p>Ultrasonic: {ultrasonic !== null ? `${ultrasonic} cm` : 'Loading...'}</p>
+      <p>Humidity: {humidity !== null ? `${humidity}%` : 'Loading...'}</p>
+      <h1>Doze Cam</h1>
+      <iframe src="http://192.168.50.5/"></iframe>
     </div>
   );
 }
