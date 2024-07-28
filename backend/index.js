@@ -7,7 +7,6 @@ const MQTT = require('mqtt');
 const APP = express();
 const server = http.createServer(APP);
 const { Server } = require("socket.io");
-const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const io = new Server(server, {
   cors: {
@@ -144,13 +143,3 @@ client.on('message', (TOPIC, payload) => {
     latestHumidity = payload.toString();
   }
 });
-
-const ESP32_CAMERA_IP = 'http://192.168.50.5/'; // Replace with your ESP-32 IP address
-
-app.use('/camera', createProxyMiddleware({
-  target: ESP32_CAMERA_IP,
-  changeOrigin: true,
-  pathRewrite: {
-    '^/camera': '/'
-  }
-}));

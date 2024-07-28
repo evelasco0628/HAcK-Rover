@@ -8,7 +8,9 @@ function Control() {
   const [temp, setTemp] = useState(null);
   const [ultrasonic, setUltrasonic] = useState(null);
   const [humidity, setHumidity] = useState(null);
-  const [textColor, setTextColor] = useState('black');
+  const [activeKey, setActiveKey] = useState(null);
+  const [repeatedKey, setRepeatedKey] = useState(null);
+
 
   useEffect(() => {
     // Listen for temperature updates
@@ -32,37 +34,52 @@ function Control() {
     };
   }, []);
 
-  useEffect( () => {
-    const handleKeyDown = (event) => {
-      if (event.key === 'w') {
-        setTextColor('blue');
-        sendDirection('forward');
-      } else if (event.key === 'a') {
-        setTextColor('red')
-        sendDirection('left');
-      } else if (event.key === 's') {
-        sendDirection('backward');
-      } else if (event.key === 'd') {
-        sendDirection('right');
-      }
-    }
-
-    const handleKeyUp = () => {
-      setTextColor('black')
-      sendDirection('stop');
-    }
+    useEffect(() => {
+      const handleKeyDown = (event) => {
+        const key = event.key.toLowerCase();
+        if (['w', 'a', 's', 'd'].includes(key) && repeatedKey !== key) {
+          setActiveKey(key);
+          setRepeatedKey(key);
+          sendDirection(key);
+        }
+      };
+  
+      const handleKeyUp = (event) => {
+        const key = event.key.toLowerCase();
+        if (['w', 'a', 's', 'd'].includes(key)) {
+          setActiveKey(null);
+          setRepeatedKey(null);
+          sendDirection('stop');
+        }
+      };
 
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('keyup', handleKeyUp);
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
-      window.removeEventListener('keyup', handleKeyUp)
-    }
-  }, [])
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, [repeatedKey]);
 
-  const sendDirection = (direction) => {
-    socket.emit('send-direction', direction);
+  const sendDirection = (key) => {
+    switch (key) {
+      case 'w':
+        socket.emit('send-direction', 'forward');
+        break;
+      case 'a':
+        socket.emit('send-direction', 'left');
+        break;
+      case 's':
+        socket.emit('send-direction', 'backward');
+        break;
+      case 'd':
+        socket.emit('send-direction', 'right');
+        break;
+      default:
+        socket.emit('send-direction', 'stop');
+        break;
+    }
   };
 
   const sendArmValue = (value) => {
@@ -77,6 +94,16 @@ function Control() {
       <p>Humidity: {humidity !== null ? `${humidity}%` : 'Loading...'}</p>
       <h1>Doze Cam</h1>
       <iframe src="http://192.168.50.5/"></iframe>
+      <div className="keys">
+      <div className="key-row">
+        <div className={`key ${activeKey === 'w' ? 'active' : ''}`}>W</div>
+      </div>
+      <div className="key-row">
+        <div className={`key ${activeKey === 'a' ? 'active' : ''}`}>A</div>
+        <div className={`key ${activeKey === 's' ? 'active' : ''}`}>S</div>
+        <div className={`key ${activeKey === 'd' ? 'active' : ''}`}>D</div>
+      </div>
+    </div>
     </div>
   );
 }

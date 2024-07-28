@@ -5,10 +5,14 @@ from machine import Pin
 from hcsr04 import HCSR04
 from constants import ssid, password, mqtt_server, mqtt_user, mqtt_pass
 
-in1 = Pin(15, Pin.OUT) 
-in2 = Pin(14, Pin.OUT)
-in3 = Pin(16, Pin.OUT)
-in4 = Pin(17, Pin.OUT)
+in1 = Pin(14, Pin.OUT) # bottom left forward  
+in2 = Pin(15, Pin.OUT) # bottom left backward 1
+in3 = Pin(16, Pin.OUT) # bottom right forward 1
+in4 = Pin(17, Pin.OUT) # bottom right backward 
+in5 = Pin(12, Pin.OUT) # top left forward 
+in6 = Pin(13, Pin.OUT) # top left backward 1
+in7 = Pin(19, Pin.OUT) # top right forward 1
+in8 = Pin(18, Pin.OUT) # top right backward 
 
 def cb(topic, msg):
     print(f"Topic: {topic}, Message: {msg}")
@@ -19,6 +23,10 @@ def cb(topic, msg):
             in2.value(0)
             in3.value(1)
             in4.value(0)
+            in5.value(1)
+            in6.value(0)
+            in7.value(1)
+            in8.value(0)
             
         elif msg == b"backward":
             print("Move backward")
@@ -26,20 +34,32 @@ def cb(topic, msg):
             in2.value(1)
             in3.value(0)
             in4.value(1)
+            in5.value(0)
+            in6.value(1)
+            in7.value(0)
+            in8.value(1)
             
         elif msg == b"right":
             print("Move right")
-            in1.value(0)
+            in1.value(1)
             in2.value(0)
             in3.value(0)
             in4.value(1)
+            in5.value(1)
+            in6.value(0)
+            in7.value(0)
+            in8.value(1)
             
         elif msg == b"left":
             print("Move left")
             in1.value(0)
             in2.value(1)
-            in3.value(0)
+            in3.value(1)
             in4.value(0)
+            in5.value(0)
+            in6.value(1)
+            in7.value(1)
+            in8.value(0)
             
         elif msg == b"stop":
             print("stop")
@@ -47,6 +67,10 @@ def cb(topic, msg):
             in2.value(0)
             in3.value(0)
             in4.value(0)
+            in5.value(0)
+            in6.value(0)
+            in7.value(0)
+            in8.value(0)
         
 
 def main():
@@ -66,7 +90,7 @@ def main():
             #client.publish("temp", sensor.temperature())
             #client.publish("humidity", sensor.humidity())
             #client.publish("ultrasonic", sonic_sensor.distance_cm())
-            sleep(1)
+            sleep(0.5)
             
             
     except KeyboardInterrupt:
@@ -78,8 +102,10 @@ def main():
         in2.value(0)
         in3.value(0)
         in4.value(0)
+        in5.value(0)
+        in6.value(0)
+        in7.value(0)
+        in8.value(0)
         
 if __name__ == "__main__":
     main()
-
-
