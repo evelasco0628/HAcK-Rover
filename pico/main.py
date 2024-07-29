@@ -1,7 +1,7 @@
 from connections import connect_mqtt, connect_internet
 from time import sleep
 from machine import Pin
-#from dht import DHT11
+from dht import DHT11
 from hcsr04 import HCSR04
 from constants import ssid, password, mqtt_server, mqtt_user, mqtt_pass
 
@@ -12,7 +12,10 @@ in4 = Pin(17, Pin.OUT) # bottom right backward
 in5 = Pin(12, Pin.OUT) # top left forward 
 in6 = Pin(13, Pin.OUT) # top left backward 1
 in7 = Pin(19, Pin.OUT) # top right forward 1
-in8 = Pin(18, Pin.OUT) # top right backward 
+in8 = Pin(18, Pin.OUT) # top right backward
+
+sensor = DHT11(Pin(5, Pin.IN, Pin.PULL_UP))
+sonic_sensor = HCSR04(trigger_pin=2, echo_pin=3, echo_timeout_us = 10000)
 
 def cb(topic, msg):
     print(f"Topic: {topic}, Message: {msg}")
@@ -77,20 +80,23 @@ def main():
     try:
         connect_internet(ssid, password)
         client = connect_mqtt(mqtt_server, mqtt_user, mqtt_pass)
-        
-        #sensor = DHT11(Pin(12, Pin.IN, Pin.PULL_UP))
-        #sonic_sensor = HCSR04(trigger_pin=17, echo_pin=15, echo_timeout_us = 10000)
-        #led = Pin('LED', Pin.OUT)
 
         client.set_callback(cb)
         client.subscribe("direction")
+        client.subscribe("pinch")
+        client.subscribe("arm")
+        sensor_delay_count = 0; # So sensor doesn't get overloaded
         while True:
             client.check_msg()
-            #sensor.measure()
-            #client.publish("temp", sensor.temperature())
-            #client.publish("humidity", sensor.humidity())
-            #client.publish("ultrasonic", sonic_sensor.distance_cm())
-            sleep(0.5)
+            
+            sensor_delay_count += 1
+            if sensor_delay_count == 10:
+                sensor.measure()
+                client.publish("temp", str(sensor.temperature()))
+                client.publish("humidity", str(sensor.humidity()))
+                client.publish("ultrasonic", str(sonic_sensor.distance_cm()))
+                sensor_delay_count = 0
+            sleep(0.2)
             
             
     except KeyboardInterrupt:
@@ -109,3 +115,4 @@ def main():
         
 if __name__ == "__main__":
     main()
+

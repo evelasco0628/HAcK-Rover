@@ -30,3 +30,9 @@
     background-color: blue;
     color: white;
   }
+
+  .my-iframe {
+    width: 50%;
+    height: 500px;
+    border: none;
+  }

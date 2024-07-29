@@ -37,7 +37,7 @@ function Control() {
     useEffect(() => {
       const handleKeyDown = (event) => {
         const key = event.key.toLowerCase();
-        if (['w', 'a', 's', 'd'].includes(key) && repeatedKey !== key) {
+        if (['w', 'a', 's', 'd', 'u', 'j', 'i', 'k', 'o', 'l'].includes(key) && repeatedKey !== key) {
           setActiveKey(key);
           setRepeatedKey(key);
           sendDirection(key);
@@ -46,7 +46,7 @@ function Control() {
   
       const handleKeyUp = (event) => {
         const key = event.key.toLowerCase();
-        if (['w', 'a', 's', 'd'].includes(key)) {
+        if (['w', 'a', 's', 'd', 'u', 'j', 'i', 'k', 'o', 'l'].includes(key)) {
           setActiveKey(null);
           setRepeatedKey(null);
           sendDirection('stop');
@@ -76,6 +76,24 @@ function Control() {
       case 'd':
         socket.emit('send-direction', 'right');
         break;
+      case 'u':
+        socket.emit('send-pinch-value', 'open');
+        break;
+      case 'j':
+        socket.emit('send-pinch-value', 'close');
+        break;
+      case 'i':
+        socket.emit('send-arm-value', 'forward');
+        break;
+      case 'k':
+        socket.emit('send-arm-value', 'backward');
+        break;
+      case 'o':
+        socket.emit('send-arm-value', 'up');
+        break;
+      case 'l':
+        socket.emit('send-arm-value', 'down');
+        break;
       default:
         socket.emit('send-direction', 'stop');
         break;
@@ -93,7 +111,11 @@ function Control() {
       <p>Ultrasonic: {ultrasonic !== null ? `${ultrasonic} cm` : 'Loading...'}</p>
       <p>Humidity: {humidity !== null ? `${humidity}%` : 'Loading...'}</p>
       <h1>Doze Cam</h1>
-      <iframe src="http://192.168.50.5/"></iframe>
+      <iframe
+      src="http://192.168.50.85/"
+      style={{ width: '50%', height: '500px', border: 'none' }}
+      title="My Iframe"
+    />
       <div className="keys">
       <div className="key-row">
         <div className={`key ${activeKey === 'w' ? 'active' : ''}`}>W</div>
