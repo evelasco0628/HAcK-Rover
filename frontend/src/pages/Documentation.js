@@ -203,6 +203,11 @@ Began researching potential arm and claw ideas. Spent a long time figuring out h
       Brainstormed different chassis ideas.
 Originally decided to create an enclosed housing that would house all of our electronics but pivoted to a flat housing with sides. We pivoted to this design to decrease the complexity of our chassis and make the electronics more accessible.
 
+Began playing around with different arm ideas in cad to see which one was most feasible. 
+Created CAD mock-ups for the arm and chassis to show a proof of concept and iron out our ideas. Created brackets for our chassis to make it more rigid.
+Began to create ideas for the claw. Went through three different iterations on SoldiWorks for the claw before settling on a design that we thought would work.
+Ended day with beginning claw print.
+
       </p>
     </div>
   </div>
@@ -213,10 +218,9 @@ Originally decided to create an enclosed housing that would house all of our ele
     </div>
     <div className="text-side">
       <p>
-      Began playing around with different arm ideas in cad to see which one was most feasible. 
-Created CAD mock-ups for the arm and chassis to show a proof of concept and iron out our ideas. Created brackets for our chassis to make it more rigid.
-Began to create ideas for the claw. Went through three different iterations on SoldiWorks for the claw before settling on a design that we thought would work.
-Ended day with beginning claw print.
+      Began 3d printing the brackets for our chassis.
+Refined the Chassis CAD model so it has the appropriate holes to mount motors and brackets. 
+
 
       </p>
     </div>
@@ -228,10 +232,7 @@ Ended day with beginning claw print.
     </div>
     <div className="text-side">
       <p>
-      Began 3d printing the brackets for our chassis.
-Refined the Chassis CAD model so it has the appropriate holes to mount motors and brackets. Also began integrating electronic components into the chassis CAD model.
-
-Realized that the initial brackets we printed were too thin so we redesigned a new bracket that better supported the chassis.
+      Created a wooden prototype of our chassis to check if the holes lined up correctly and allow other team members to begin testing their code for the wheels.
 
       </p>
     </div>
@@ -243,7 +244,11 @@ Realized that the initial brackets we printed were too thin so we redesigned a n
     </div>
     <div className="text-side">
       <p>
-      Created a wooden prototype of our chassis to check if the holes lined up correctly and allow other team members to begin testing their code for the wheels.
+      Started with seeing the print from the night before. Claw was far too small so we needed another version.
+Began printing new claw in the middle of day.
+Ended the day with 3D printing final version of the claws
+
+
       </p>
     </div>
   </div>
@@ -254,11 +259,9 @@ Realized that the initial brackets we printed were too thin so we redesigned a n
     </div>
     <div className="text-side">
       <p>
-      Began 3D printing arms and the arm base to test for the claw
+      Began assembling the chassis out of acrylic with the brackets.
 
-Started with seeing the print from the night before. Claw was far too small so we needed another version.
-Began printing new claw in the middle of day.
-Ended the day with 3D printing final version of the claws
+Began testing of the claw and arm
 
       </p>
     </div>
@@ -270,9 +273,10 @@ Ended the day with 3D printing final version of the claws
     </div>
     <div className="text-side">
       <p>
-      Began assembling the chassis out of acrylic with the brackets.
+      Began testing the chassis to make sure it worked correctly.
 
-Began testing of the claw and arm
+Ran out of time to correctly integrate the arm and the claw to the chassis.
+
 
       </p>
     </div>
